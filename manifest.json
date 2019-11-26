@@ -1,0 +1,20 @@
+{
+  "manifest_version": 2,
+  "name": "Zwift Insider Segments",
+  "version": "0.1",
+  "content_scripts": [
+    {
+      "matches": [
+        "http://strava.com/activities/*",
+        "https://strava.com/activities/*",
+        "http://www.strava.com/activities/*",
+        "https://www.strava.com/activities/*"
+      ],
+      "js": ["index.js"]
+    }
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "browser_action": {}
+}
