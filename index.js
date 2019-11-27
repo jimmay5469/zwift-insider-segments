@@ -50,13 +50,19 @@ function displayMessage() {
   `)
 }
 
+function hideAchievementsBeingRecomputedMessage() {
+  const messageEl = document.querySelector('#system-messages-js .alert-message')
+  if (messageEl && messageEl.innerText === "Achievements are being recomputed for this activity. This may take a moment.") messageEl.remove()
+}
+
 (()=> {
   if (isZwiftActivity()) showZwiftInsiderSegmentsOnly()
+  hideAchievementsBeingRecomputedMessage()
 })()
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-    if (request.message === "clicked_browser_action" && confirm('Are you sure you want run Zwift Insider Segments?')) {
+    if (request.message === "clicked_browser_action" && (isZwiftActivity() || confirm('Are you sure you only want to show Zwift Insider verified segments? This activity was not recognized as a Zwift activity.'))) {
       showZwiftInsiderSegmentsOnly()
     }
   }
