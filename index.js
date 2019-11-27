@@ -17,6 +17,7 @@ function showZwiftInsiderSegmentsOnly() {
     const name = segment.querySelector('.name').innerText
     if (name.toLowerCase().indexOf('(zwift insider verified)') === -1) {
       console.log('Hiding', name)
+      displayMessage()
       segment.querySelector('.toggle-effort-visibility').click()
       shouldRefreshAchievements = true
     }
@@ -26,6 +27,7 @@ function showZwiftInsiderSegmentsOnly() {
     const name = segment.querySelector('.name').innerText
     if (name.toLowerCase().indexOf('(zwift insider verified)') !== -1) {
       console.log('Unhiding', name)
+      displayMessage()
       segment.querySelector('.toggle-effort-visibility').click()
       shouldRefreshAchievements = true
     }
@@ -38,6 +40,14 @@ function showZwiftInsiderSegmentsOnly() {
   } else {
     console.log('No changes necessary!')
   }
+}
+
+function displayMessage() {
+  document.body.insertAdjacentHTML('beforeend', `
+    <div style="z-index: 9999; display: flex; position: fixed; top: 0; bottom: 0; left: 0; right: 0; background: #3e5062; color: white; font-size: 30px; justify-content: center; align-items: center;">
+      Loading&nbsp;<span style="font-weight: 600; color: #ff6900;">ZWIFT</span><span style="font-weight: 600; color: rgba(255,255,255,.6);">INSIDER</span>&nbsp;verified segments...
+    </div>
+  `)
 }
 
 (()=> {
